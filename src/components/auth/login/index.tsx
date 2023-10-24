@@ -1,13 +1,31 @@
-import Greeting from "./Greeting";
+import {Button, TextField, Typography} from "@mui/material";
+import {Link} from "react-router-dom";
+import {IPropsLogin} from "../../../common/types/auth";
+import React from "react";
 
-const LoginPage = () => {
+const LoginPage: React.FC<IPropsLogin> = (props): JSX.Element => {
 
-    const name = "Viva"
+    const {setEmail, setPassword} = props
+
     return (
-        <div>
-            <h1>Login page</h1>
-            <Greeting name={name}/>
-        </div>
+        <>
+            <Typography variant="h2" textAlign={'center'}>Авторизация</Typography>
+            <Typography variant="body1" marginBottom={3} textAlign={'center'}>Введите ваш
+                логин и
+                пароль</Typography>
+            <TextField fullWidth={true} onChange={(e) => {
+                setEmail(e.target.value)
+            }} margin="normal" label="Email" variant="outlined"
+                       placeholder="Введите ваш email"/>
+            <TextField type={"password"} onChange={(e) => {
+                setPassword(e.target.value)
+            }} fullWidth={true} margin="normal" label="Password" variant="outlined"
+                       placeholder="Введите ваш пароль"/>
+            <Button type='submit' sx={{marginTop: 2, marginBottom: 2, width: '60%'}}
+                    variant="contained">Войти</Button>
+            <Typography variant="body1" textAlign={'center'}>У вас нет
+                аккаунта?<Link to='/register' className="incitingText"> Регистрация</Link></Typography>
+        </>
     );
 };
 
