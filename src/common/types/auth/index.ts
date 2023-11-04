@@ -23,6 +23,11 @@ export interface IPropsRegister {
     setUserName: (value: string) => void
 }
 
+export interface IAuthStateReturn {
+    user: IPublicUser,
+    token: string
+}
+
 export interface IAuthState {
     user: IPublicUser,
     isLogged: boolean
