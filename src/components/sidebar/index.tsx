@@ -1,9 +1,23 @@
 import {useStyles} from "./styles";
 import {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
-import {Box, Drawer, IconButton, Typography, useTheme} from "@mui/material";
+import {
+    Box,
+    Drawer,
+    IconButton,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText,
+    Typography,
+    useTheme
+} from "@mui/material";
 import FlexBetween from "../flex-between";
-import {ChevronLeftOutlined} from "@mui/icons-material";
+import {ChevronLeftOutlined, LogoutOutlined} from "@mui/icons-material";
+import {navMenu} from "../../common/moks/navigate";
+import {tokens} from "../../theme";
+import Logo from '../../assets/images/sidebar/imageLogo.svg'
 
 const SidebarComponent = (props: any) => {
     const [active, setActive] = useState('')
@@ -12,10 +26,31 @@ const SidebarComponent = (props: any) => {
     const {pathname} = useLocation()
     const navigate = useNavigate()
     const theme = useTheme()
+    const colors = tokens(theme.palette.mode)
 
     useEffect(() => {
         setActive(pathname.substring(1))
     }, [pathname])
+
+    const renderNavMenu = navMenu.map((item): JSX.Element => (
+        <ListItem key={item.id}>
+            <ListItemButton
+                onClick={() => {
+                    navigate(`${item.path}`)
+                }}
+                className={classes.navItem}
+            >
+                <ListItemIcon>
+                    {item.icon}
+                </ListItemIcon>
+                <ListItemText>
+                    <Typography variant='body1'>
+                        {item.name}
+                    </Typography>
+                </ListItemText>
+            </ListItemButton>
+        </ListItem>
+    ))
 
     return (
         <Box component='nav'>
@@ -35,11 +70,15 @@ const SidebarComponent = (props: any) => {
                         }
                     }}
                 >
-                    <Box width='100%'>
+                    <Box className={classes.navBlock}>
                         <Box>
                             <FlexBetween>
-                                <Box display='flex' alignItems='center' gap='10px'>
-                                    <Typography>
+                                <Box className={classes.brand}>
+                                    <img src={Logo} alt="Logo image"/>
+                                    <Typography
+                                        className={classes.brandTitle}
+                                        variant='h1'
+                                    >
                                         Demo
                                     </Typography>
                                 </Box>
@@ -50,6 +89,25 @@ const SidebarComponent = (props: any) => {
                                 )}
                             </FlexBetween>
                         </Box>
+                        <List className={classes.navList}>
+                            {renderNavMenu}
+                        </List>
+                    </Box>
+                    <Box width='100%'>
+                        <List>
+                            <ListItem key={31}>
+                                <ListItemButton className={classes.navItem}>
+                                    <ListItemIcon>
+                                        <LogoutOutlined/>
+                                    </ListItemIcon>
+                                    <ListItemText>
+                                        <Typography variant='body1'>
+                                            Logout
+                                        </Typography>
+                                    </ListItemText>
+                                </ListItemButton>
+                            </ListItem>
+                        </List>
                     </Box>
                 </Drawer>
             )}

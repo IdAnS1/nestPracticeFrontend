@@ -4,11 +4,13 @@ import {useLocation} from "react-router-dom";
 import {Box, useMediaQuery} from "@mui/material";
 import SidebarComponent from "../sidebar";
 import {useState} from "react";
+import {useStyles} from "./styles";
 
 const LayouteComponent = ({children}: ILayout) => {
     const [isOpen, setIsOpen] = useState(true)
     const {pathname} = useLocation()
     const isNonMobile = useMediaQuery('(min-width:600px)')
+    const classes = useStyles()
 
     return (
         <>
@@ -24,11 +26,11 @@ const LayouteComponent = ({children}: ILayout) => {
                 >
                     <SidebarComponent
                         isNonMobile={isNonMobile}
-                        drawerWidth='250'
+                        drawerWidth='250px'
                         isOpen={isOpen}
                         setIsOpen={setIsOpen}
                     />
-                    <Box>
+                    <Box className={classes.mainSection}>
                         <TopBarComponent/>
                         {children}
                     </Box>
