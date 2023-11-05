@@ -14,16 +14,14 @@ export const useStyles = makeStyles((theme: Theme) => {
             },
             searchIcon: {
                 '&:hover': {
-                    'backgroundColor': 'transparent'
+                    'backgroundColor': 'transparent !important'
                 }
             },
             root: {
-                display: 'flex',
-                justifyContent: 'space-between',
-                padding: '32px 24px',
-                alignItems: 'center',
-                backgroundColor: colors.primary.DEFAULT,
-                borderBottom: `1px solid ${colors.borderColor}`
+                position: 'static',
+                background: `${colors.primary.DEFAULT} !important`,
+                borderBottom: `1px solid ${colors.borderColor}`,
+                boxShadow: 'none !important'
             },
             themeIcon: {
                 marginRight: '45px !important'
@@ -37,7 +35,41 @@ export const useStyles = makeStyles((theme: Theme) => {
             },
             searchInput: {
                 padding: '8px 18px'
+            },
+            toolbar: {
+                justifyContent: 'space-between',
+                padding: '20px 45px'
+            },
+            menuIcon: {
+                marginRight: '15px',
+                cursor: 'pointer'
             }
         })
 
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
