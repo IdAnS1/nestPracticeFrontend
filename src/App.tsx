@@ -1,6 +1,6 @@
 import Home from "./components/home";
 import {Route, Routes} from "react-router-dom";
-import PrivateRoue from "./utils/router/privateRoue";
+import PrivateRoute from "./utils/router/privateRoute";
 import {ColorModeContext, useMode} from './theme/index'
 import {CssBaseline, ThemeProvider} from "@mui/material";
 import LayouteComponent from "./components/layout";
@@ -16,10 +16,10 @@ function App() {
         <ColorModeContext.Provider value={colorMode}>
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
-                <LayouteComponent>
-                    <div className='app'>
-                        <Routes>
-                            <Route element={<PrivateRoue/>}>
+                <div className='app'>
+                    <Routes>
+                        <Route element={<LayouteComponent/>}>
+                            <Route element={<PrivateRoute/>}>
                                 <Route path='/' element={<Home/>}/>
                                 <Route path='/watchlist' element={<WatchlistComponent/>}/>
                                 <Route path='/news' element={<NewsComponent/>}/>
@@ -27,9 +27,9 @@ function App() {
                             </Route>
                             <Route path='/login' element={<AuthRootComponent/>}/>
                             <Route path='/register' element={<AuthRootComponent/>}/>
-                        </Routes>
-                    </div>
-                </LayouteComponent>
+                        </Route>
+                    </Routes>
+                </div>
             </ThemeProvider>
         </ColorModeContext.Provider>
     )
