@@ -9,3 +9,9 @@
 .app {
     /*padding: 20px;*/
 }
+
+.incitingText {
+    color: #1900D5;
+    cursor: pointer;
+    marginLeft: 5px;
+}

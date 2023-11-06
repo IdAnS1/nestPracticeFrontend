@@ -1,7 +1,9 @@
-import {Button, TextField, Typography} from "@mui/material";
+import {TextField, Typography} from "@mui/material";
 import {Link} from "react-router-dom";
 import {IPropsLogin} from "../../../common/types/auth";
 import React from "react";
+import AppButton from "../../app-button";
+
 
 const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
 
@@ -9,7 +11,7 @@ const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
 
     return (
         <>
-            <Typography variant="h2" textAlign={'center'}>Авторизация</Typography>
+            <Typography variant="h2" textAlign={'center'} fontSize={32}>Авторизация</Typography>
             <Typography variant="body1" marginBottom={3} textAlign={'center'}>Введите ваш
                 логин и
                 пароль</Typography>
@@ -34,8 +36,9 @@ const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
                 helperText={errors.password ? `${errors.password.message}` : ''}
                 {...register('password')}
             />
-            <Button type='submit' sx={{marginTop: 2, marginBottom: 2, width: '60%'}}
-                    variant="contained">Войти</Button>
+            <AppButton type='submit'
+                       sx={{marginTop: 2, marginBottom: 2, width: '60%', textTransform: 'none !important'}}
+                       variant="contained">Войти</AppButton>
             <Typography variant="body1" textAlign={'center'}>У вас нет
                 аккаунта?<Link to='/register' className="incitingText"> Регистрация</Link></Typography>
         </>

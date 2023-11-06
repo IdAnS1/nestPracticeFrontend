@@ -1,5 +1,5 @@
 import {useStyles} from "./styles";
-import {useEffect, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import {
     Box,
@@ -16,20 +16,20 @@ import {
 import FlexBetween from "../flex-between";
 import {ChevronLeftOutlined, LogoutOutlined} from "@mui/icons-material";
 import {navMenu} from "../../common/moks/navigate";
-import {tokens} from "../../theme";
 import Logo from '../../assets/images/sidebar/imageLogo.svg'
+import {ISidebarProps} from "../../common/types/sidebar";
 
-const SidebarComponent = (props: any) => {
+const SidebarComponent: FC<ISidebarProps> = (props: ISidebarProps) => {
     const [active, setActive] = useState('')
     const {isNonMobile, drawerWidth, isOpen, setIsOpen} = props
     const classes = useStyles()
     const {pathname} = useLocation()
     const navigate = useNavigate()
     const theme = useTheme()
-    const colors = tokens(theme.palette.mode)
+    // const colors = tokens(theme.palette.mode)
 
     useEffect(() => {
-        setActive(pathname.substring(1))
+        setActive(pathname)
     }, [pathname])
 
     const renderNavMenu = navMenu.map((item): JSX.Element => (
@@ -38,7 +38,7 @@ const SidebarComponent = (props: any) => {
                 onClick={() => {
                     navigate(`${item.path}`)
                 }}
-                className={classes.navItem}
+                className={active === item.path ? classes.active : classes.navItem}
             >
                 <ListItemIcon>
                     {item.icon}
