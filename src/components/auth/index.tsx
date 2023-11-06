@@ -1,5 +1,4 @@
 import {useLocation, useNavigate} from "react-router-dom";
-import './style.scss'
 import {Box} from "@mui/material";
 import LoginPage from "./login";
 import RegisterPage from "./register";
@@ -11,11 +10,14 @@ import {AppErrors} from "../../common/errors";
 import {useForm} from "react-hook-form";
 import {yupResolver} from "@hookform/resolvers/yup"
 import {LoginSchema, RegisterSchema} from "../../utils/yup";
+import {useStyles} from "./styles";
+
 
 const AuthRootComponent: React.FC = (): JSX.Element => {
     const location = useLocation()
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
+    const classes = useStyles()
     const {
         register,
         formState: {
@@ -52,7 +54,6 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
                     await dispatch(login(newUser.data))
                     navigate('/')
                 } catch (e) {
-                    console.log(e)
                     return e
                 }
             } else {
@@ -63,8 +64,8 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
 
     // @ts-ignore
     return (
-        <div className='root'>
-            <form className="form" onSubmit={handleSubmit(handleSubmitForm)}>
+        <div className={classes.root}>
+            <form className={classes.form} onSubmit={handleSubmit(handleSubmitForm)}>
                 <Box
                     sx={{
                         display: 'flex',
@@ -75,7 +76,7 @@ const AuthRootComponent: React.FC = (): JSX.Element => {
                         margin: "auto",
                         padding: 5,
                         borderRadius: 5,
-                        boxShadow: '5px 5px 10px #ccc'
+                        boxShadow: '-3px -2px 20px 1px #202020'
                     }}
                 >
                     {location.pathname === '/login' ?
