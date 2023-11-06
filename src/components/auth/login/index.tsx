@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {IPropsLogin} from "../../../common/types/auth";
 import React from "react";
 
-const LoginPage: React.FC<IPropsLogin> = (props): JSX.Element => {
+const LoginPage: React.FC<IPropsLogin> = (props: IPropsLogin): JSX.Element => {
 
     const {register, errors} = props
 
@@ -21,11 +21,7 @@ const LoginPage: React.FC<IPropsLogin> = (props): JSX.Element => {
                 variant="outlined"
                 placeholder="Введите ваш email"
                 helperText={errors.email ? `${errors.email.message}` : ''}
-                {...register('email', {
-                    required: 'Это обязательное поле',
-                    pattern: /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
-
-                })}
+                {...register('email')}
             />
             <TextField
                 error={!!errors.password}
@@ -36,10 +32,7 @@ const LoginPage: React.FC<IPropsLogin> = (props): JSX.Element => {
                 variant="outlined"
                 placeholder="Введите ваш пароль"
                 helperText={errors.password ? `${errors.password.message}` : ''}
-                {...register('password', {
-                    required: 'Это обязательное поле',
-                    minLength: 5
-                })}
+                {...register('password')}
             />
             <Button type='submit' sx={{marginTop: 2, marginBottom: 2, width: '60%'}}
                     variant="contained">Войти</Button>
