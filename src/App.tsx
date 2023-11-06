@@ -1,7 +1,7 @@
 import Home from "./components/home";
 import {Route, Routes} from "react-router-dom";
 import PrivateRoute from "./utils/router/privateRoute";
-import {ColorModeContext, useMode} from './theme/index'
+import {ColorModeContext, useMode} from './theme'
 import {CssBaseline, ThemeProvider} from "@mui/material";
 import LayouteComponent from "./components/layout";
 import AuthRootComponent from "./components/auth";
