@@ -1,5 +1,5 @@
 import {AppBar, Box, Grid, IconButton, InputBase, Toolbar, Typography, useTheme} from "@mui/material";
-import {useAppSelector} from "../../utils/hook";
+// import {useAppSelector} from "../../utils/hook";
 import {ColorModeContext} from "../../theme";
 import {FC, useContext} from "react";
 import {useStyles} from "./styles";
@@ -9,7 +9,7 @@ import {ITopBarProps} from "../../common/types/top-bar";
 
 
 const TopBarComponent: FC<ITopBarProps> = (props: ITopBarProps) => {
-    const {user} = useAppSelector(state => state.auth.user)
+    // const {user} = useAppSelector(state => state.auth.user)
     const theme = useTheme()
     const colorMode: any = useContext(ColorModeContext)
     const classes = useStyles()
@@ -20,7 +20,7 @@ const TopBarComponent: FC<ITopBarProps> = (props: ITopBarProps) => {
             <Toolbar className={classes.toolbar}>
                 <FlexBetween>
                     <MenuOutlined className={classes.menuIcon} onClick={() => setIsOpen(!isOpen)}/>
-                    <Typography variant='h3'>Welcome {user?.firstName}</Typography>
+                    <Typography variant='h3'>Welcome {sessionStorage.getItem('name')}</Typography>
                 </FlexBetween>
                 <Box display='flex' alignItems='center'>
                     <Grid className={classes.iconBlock}>
