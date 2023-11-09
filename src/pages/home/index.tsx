@@ -4,6 +4,8 @@ import {getFavoriteAssets} from "../../store/thunks/assets";
 import {Box, Grid} from "@mui/material";
 import {useStyles} from "./styles";
 import {AreaChart} from "../../components/charts/area-chart";
+import imgUp from '../../assets/images/chart/trend-up.svg'
+import imgDown from '../../assets/images/chart/trend-down.svg'
 
 const Home = () => {
     const dispatch = useAppDispatch()
@@ -29,20 +31,40 @@ const Home = () => {
     }, [favoriteAssetName, fetchData])
 
     const renderFavoriteBlock = FilteredArray.map((item: any) => {
-        const currentPrice = item.data.prices[0]
-        const currentCap = item.data.market_caps[0]
+        console.log(item)
+        const currentPrice = item.singleAssets.map(
+            (element: any) => element.current_price
+        )
+        // const currentCap = item.singleAssets.map(
+        //     (element: any) => element.market_cap
+        // )
+        const changePrice = item.singleAssets.map(
+            (element: any) => element.price_change_percentage_24h
+        )
         return (
             <Grid key={item.name} item lg={6} sm={6} xs={12}>
                 <Grid container className={classes.topCardItem}>
                     <Grid item lg={6} sm={6} xs={12}>
                         <h3 className={classes.assetName}>{item.name}</h3>
                         <div className={classes.itemDetails}>
-                            <h3 className={classes.cardPrice}>{currentPrice[1].toFixed(2)}</h3>
-                            <p className={classes.cardCapitalize}>{currentCap[1].toFixed(0)}</p>
+                            <h3 className={classes.cardPrice}>{currentPrice} $</h3>
+                            <Box className={
+                                +changePrice > 0
+                                    ? `${classes.priceTrend} ${classes.trendUp}`
+                                    : `${classes.priceTrend} ${classes.trendDown}`
+                            }
+                            >
+                                {+changePrice > 0 ? (
+                                    <img src={imgUp} alt={'Up'}/>
+                                ) : (
+                                    <img src={imgDown} alt={'Down'}/>
+                                )}
+                                <span>{(+changePrice).toFixed(2)} % </span>
+                            </Box>
                         </div>
                     </Grid>
                     <Grid item lg={6} sm={6} xs={12}>
-                        <AreaChart data={item.data.prices}/>
+                        <AreaChart data={item.data}/>
                     </Grid>
                 </Grid>
             </Grid>
