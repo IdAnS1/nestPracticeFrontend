@@ -52,7 +52,47 @@ export const useStyles = makeStyles((theme: Theme) => {
             trendDown: {
                 backgroundColor: '#FFA7A7',
                 color: '#740000'
+            },
+            areaChart: {
+                marginBottom: 32
+            },
+            lineChartBlock: {
+                backgroundColor: `${
+                    theme.palette.mode === 'light'
+                        ? colors.primary.DEFAULT
+                        : colors.primary[600]
+                }`,
+                padding: '20px 16px',
+                minHeight: 270,
+                border: `1px solid ${colors.borderColor}`,
+                borderRadius: 12,
             }
         }
     )
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
