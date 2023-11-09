@@ -1,9 +1,9 @@
 export interface IAreaChartProps {
-    data: [number[]]
+    data: number[][]
 }
 
 export interface IChartData {
     name: string
     price_chart_data: number[][]
-    singleAsset: any
+    singleAssets: any[]
 }
