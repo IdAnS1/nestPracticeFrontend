@@ -32,7 +32,8 @@ const Home = () => {
         fetchData(favoriteAssetName)
     }, [favoriteAssetName, fetchData])
 
-    const renderFavoriteBlock = filteredArray.map((item: any) => {
+    const renderFavoriteBlock = filteredArray.map((item: IChartData) => {
+        console.log(item)
         const currentPrice = item.singleAssets.map(
             (element: any) => element.current_price
         )
