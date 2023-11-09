@@ -6,15 +6,17 @@ import {useStyles} from "./styles";
 import {AreaChart} from "../../components/charts/area-chart";
 import imgUp from '../../assets/images/chart/trend-up.svg'
 import imgDown from '../../assets/images/chart/trend-down.svg'
+import {LineChart} from "../../components/charts/line-chart";
+import {IChartData} from "../../common/types/assets";
 
 const Home = () => {
     const dispatch = useAppDispatch()
-    const favoriteAssets: any[] = useAppSelector(state => state.assets.favoriteAssets)
+    const favoriteAssets: IChartData[] = useAppSelector(state => state.assets.favoriteAssets)
     const fetchDataRef = useRef(false)
     const classes = useStyles()
 
     const favoriteAssetName = useMemo(() => ['bitcoin', 'ethereum'], [])
-    const FilteredArray = favoriteAssets.filter((value, index, array) => index === array.findIndex((t) => t.name === value.name))
+    const filteredArray = favoriteAssets.filter((value, index, array) => index === array.findIndex((t) => t.name === value.name))
 
     const fetchData = useCallback((data: string[]) => {
         data.forEach((item: string) => {
@@ -30,8 +32,7 @@ const Home = () => {
         fetchData(favoriteAssetName)
     }, [favoriteAssetName, fetchData])
 
-    const renderFavoriteBlock = FilteredArray.map((item: any) => {
-        console.log(item)
+    const renderFavoriteBlock = filteredArray.map((item: any) => {
         const currentPrice = item.singleAssets.map(
             (element: any) => element.current_price
         )
@@ -64,7 +65,7 @@ const Home = () => {
                         </div>
                     </Grid>
                     <Grid item lg={6} sm={6} xs={12}>
-                        <AreaChart data={item.data}/>
+                        <AreaChart data={item.price_chart_data}/>
                     </Grid>
                 </Grid>
             </Grid>
@@ -73,8 +74,13 @@ const Home = () => {
 
     return (
         <Box className={classes.root}>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} className={classes.areaChart}>
                 {renderFavoriteBlock}
+            </Grid>
+            <Grid container className={classes.lineChartBlock}>
+                <Grid item xs={12} sm={12} lg={12}>
+                    {filteredArray.length && <LineChart data={filteredArray}/>}
+                </Grid>
             </Grid>
         </Box>
     );
