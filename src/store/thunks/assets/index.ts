@@ -20,3 +20,18 @@ export const getFavoriteAssets = createAsyncThunk(
             }
         }
     })
+
+export const getTopPriceData = createAsyncThunk(
+    'coins/markets/topPrice',
+    async (_, thunkAPI) => {
+        try {
+            const assets = await coinGeckoApi.get(`/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en`)
+            return assets.data
+        } catch (error: any) {
+            if (error.response && error.response.data.message) {
+                return thunkAPI.rejectWithValue(error.response.data.message)
+            } else {
+                return thunkAPI.rejectWithValue(error.message)
+            }
+        }
+    })

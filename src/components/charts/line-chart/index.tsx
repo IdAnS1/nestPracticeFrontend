@@ -24,6 +24,7 @@ ChartJS.register(
 export function LineChart(props: any) {
 
     const {data} = props
+    console.log(data)
 
     const options = {
         responsive: true,
@@ -53,7 +54,7 @@ export function LineChart(props: any) {
 
     const value = {
         labels: data[0].price_chart_data.map((item: any) =>
-            moment(item[0]).format("DD.MM.YY")
+            moment(item[0]).format("HH.mm")
         ),
         datasets: [
             {
@@ -66,7 +67,15 @@ export function LineChart(props: any) {
     };
 
 
-    return <Line style={{maxWidth: '100%'}} options={options} data={value}/>;
+    return (
+        <>
+            <div style={{display: "flex", alignItems: "center", marginBottom: 20,}}>
+                <h1 style={{textTransform: "capitalize", marginRight: 20}}>{data[0].name}</h1>
+                <div style={{width: 15, height: 15, borderRadius: "50%", backgroundColor: 'rgb(255, 99, 132)'}}></div>
+            </div>
+            <Line style={{maxWidth: '100%', maxHeight: 600}} options={options} data={value}/>
+        </>
+    );
 }
 
 

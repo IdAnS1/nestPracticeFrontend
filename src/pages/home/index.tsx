@@ -1,6 +1,6 @@
 import {useCallback, useEffect, useMemo, useRef} from "react";
 import {useAppDispatch, useAppSelector} from "../../utils/hook";
-import {getFavoriteAssets} from "../../store/thunks/assets";
+import {getFavoriteAssets, getTopPriceData} from "../../store/thunks/assets";
 import {Box, Grid} from "@mui/material";
 import {useStyles} from "./styles";
 import {AreaChart} from "../../components/charts/area-chart";
@@ -8,21 +8,31 @@ import imgUp from '../../assets/images/chart/trend-up.svg'
 import imgDown from '../../assets/images/chart/trend-down.svg'
 import {LineChart} from "../../components/charts/line-chart";
 import {IChartData} from "../../common/types/assets";
+import TopPriceComponent from "../../components/top-price";
 
 const Home = () => {
     const dispatch = useAppDispatch()
     const favoriteAssets: IChartData[] = useAppSelector(state => state.assets.favoriteAssets)
+    const topPriceAssets: any = useAppSelector(state => state.assets.assets)
     const fetchDataRef = useRef(false)
     const classes = useStyles()
 
-    const favoriteAssetName = useMemo(() => ['bitcoin', 'ethereum'], [])
-    const filteredArray = favoriteAssets.filter((value, index, array) => index === array.findIndex((t) => t.name === value.name))
+    const favoriteAssetName = ['bitcoin', 'ethereum']
+    const filteredArray = useMemo(() => {
+        return favoriteAssets.filter((value, index, array) => index === array.findIndex((t) => t.name === value.name))
+    }, [favoriteAssets])
+
+    const filteredAssetArray = topPriceAssets.slice().sort((a: any, b: any) => b.current_price - a.current_price).slice(0, 6)
+    console.log(filteredAssetArray)
+
 
     const fetchData = useCallback((data: string[]) => {
         data.forEach((item: string) => {
             dispatch(getFavoriteAssets(item))
         })
     }, [dispatch])
+    // console.log(topPriceAssets)
+
 
     // console.log('Assets', favoriteAssets)
 
@@ -30,7 +40,8 @@ const Home = () => {
         if (fetchDataRef.current) return
         fetchDataRef.current = true
         fetchData(favoriteAssetName)
-    }, [favoriteAssetName, fetchData])
+        dispatch(getTopPriceData())
+    }, [favoriteAssetName, fetchData, dispatch])
 
     const renderFavoriteBlock = filteredArray.map((item: IChartData) => {
         console.log(item)
@@ -80,7 +91,12 @@ const Home = () => {
             </Grid>
             <Grid container className={classes.lineChartBlock}>
                 <Grid item xs={12} sm={12} lg={12}>
-                    {filteredArray.length && <LineChart data={filteredArray}/>}
+                    {filteredArray.length && (<LineChart data={filteredArray}/>)}
+                </Grid>
+            </Grid>
+            <Grid container className={classes.topPriceRoot}>
+                <Grid item xs={12} sm={12} lg={12}>
+                    {filteredAssetArray.length && (<TopPriceComponent assets={filteredAssetArray}/>)}
                 </Grid>
             </Grid>
         </Box>
