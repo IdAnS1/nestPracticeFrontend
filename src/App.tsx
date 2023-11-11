@@ -8,6 +8,7 @@ import AuthRootComponent from "./components/auth";
 import NewsComponent from "./pages/news";
 import WatchlistComponent from "./pages/watchlist";
 import SettingsComponent from "./pages/settings";
+import SingleAssetPage from "./pages/single-asset";
 
 function App() {
     const [theme, colorMode] = useMode()
@@ -24,6 +25,7 @@ function App() {
                                 <Route path='/watchlist' element={<WatchlistComponent/>}/>
                                 <Route path='/news' element={<NewsComponent/>}/>
                                 <Route path='/settings' element={<SettingsComponent/>}/>
+                                <Route path='/single/:id' element={<SingleAssetPage/>}/>
                             </Route>
                             <Route path='/login' element={<AuthRootComponent/>}/>
                             <Route path='/register' element={<AuthRootComponent/>}/>
