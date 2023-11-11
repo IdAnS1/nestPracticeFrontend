@@ -1,10 +1,11 @@
 import {Autocomplete, Stack, TextField} from "@mui/material";
 import {useAppSelector} from "../../utils/hook";
+import {useNavigate} from "react-router-dom";
 
 const SearchBarComponent = () => {
 
+    const navigate = useNavigate()
     const assetsArray: any = useAppSelector(state => state.assets.assets)
-
 
     return (
 
@@ -12,6 +13,7 @@ const SearchBarComponent = () => {
 
             <Autocomplete
                 freeSolo
+                onChange={(e: any, value: string | null) => !!value ? navigate(`single/${value}`) : null}
                 renderInput={(element) => (
                     <TextField
                         {...element}
