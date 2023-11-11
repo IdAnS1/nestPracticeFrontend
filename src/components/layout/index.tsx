@@ -8,7 +8,8 @@ import {useStyles} from "./styles";
 const LayouteComponent: FC = () => {
     const [isOpen, setIsOpen] = useState(false)
     const {pathname} = useLocation()
-    const isNonMobile = useMediaQuery('(min-width:600px)')
+    const isNonMobile = useMediaQuery('(min-width:760px)')
+    const isNonMobilePl = useMediaQuery('(min-width:1030px)')
     const classes = useStyles()
 
     return (
@@ -19,7 +20,7 @@ const LayouteComponent: FC = () => {
                 </>
             ) : (
                 <Box
-                    display={isNonMobile ? 'flex' : 'block'}
+                    display={isNonMobilePl ? 'flex' : 'block'}
                     width='100%'
                     height='100%'
                 >
@@ -33,6 +34,7 @@ const LayouteComponent: FC = () => {
                         <TopBarComponent
                             isOpen={isOpen}
                             setIsOpen={setIsOpen}
+                            isNonMobile={isNonMobile}
                         />
                         <Outlet/>
                     </Box>

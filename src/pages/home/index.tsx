@@ -13,7 +13,7 @@ import TopPriceComponent from "../../components/top-price";
 const Home = () => {
     const dispatch = useAppDispatch()
     const favoriteAssets: IChartData[] = useAppSelector(state => state.assets.favoriteAssets)
-    const topPriceAssets: any = useAppSelector(state => state.assets.assets)
+    const assetsArray: any = useAppSelector(state => state.assets.assets)
     const fetchDataRef = useRef(false)
     const classes = useStyles()
 
@@ -22,7 +22,7 @@ const Home = () => {
         return favoriteAssets.filter((value, index, array) => index === array.findIndex((t) => t.name === value.name))
     }, [favoriteAssets])
 
-    const filteredAssetArray = topPriceAssets.slice().sort((a: any, b: any) => b.current_price - a.current_price).slice(0, 6)
+    const filteredAssetArray = assetsArray.slice().sort((a: any, b: any) => b.current_price - a.current_price).slice(0, 6)
     console.log(filteredAssetArray)
 
 

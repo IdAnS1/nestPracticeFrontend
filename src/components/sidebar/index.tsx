@@ -18,6 +18,8 @@ import {ChevronLeftOutlined, LogoutOutlined} from "@mui/icons-material";
 import {navMenu} from "../../common/moks/navigate";
 import Logo from '../../assets/images/sidebar/imageLogo.svg'
 import {ISidebarProps} from "../../common/types/sidebar";
+import ThemeSwitcherComponent from "../theme-switcher";
+import SearchBarComponent from "../search-bar";
 
 const SidebarComponent: FC<ISidebarProps> = (props: ISidebarProps) => {
     const [active, setActive] = useState('')
@@ -89,12 +91,16 @@ const SidebarComponent: FC<ISidebarProps> = (props: ISidebarProps) => {
                                 )}
                             </FlexBetween>
                         </Box>
+                        <List>
+                            {!isNonMobile && (<ListItem><SearchBarComponent/></ListItem>)}
+                        </List>
                         <List className={classes.navList}>
                             {renderNavMenu}
                         </List>
                     </Box>
                     <Box width='100%'>
                         <List>
+                            {!isNonMobile && (<ListItem><ThemeSwitcherComponent/></ListItem>)}
                             <ListItem key={31}>
                                 <ListItemButton className={classes.navItem}>
                                     <ListItemIcon>
