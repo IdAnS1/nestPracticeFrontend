@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {getFavoriteAssets, getTopPriceData} from "../../thunks/assets";
+import {createWatchListRecord, getFavoriteAssets, getTopPriceData} from "../../thunks/assets";
 
 
 const initialState: any = {
@@ -17,6 +17,9 @@ export const assetsSlice = createSlice({
         })
         builder.addCase(getTopPriceData.fulfilled, (state, action) => {
             state.assets = action.payload
+        })
+        builder.addCase(createWatchListRecord.fulfilled, (state, action) => {
+            console.log(action.payload)
         })
     }
 })
