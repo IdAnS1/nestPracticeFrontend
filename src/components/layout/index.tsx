@@ -6,7 +6,7 @@ import {FC, useState} from "react";
 import {useStyles} from "./styles";
 
 const LayouteComponent: FC = () => {
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(true)
     const {pathname} = useLocation()
     const isNonMobile = useMediaQuery('(min-width:760px)')
     const isNonMobilePl = useMediaQuery('(min-width:1030px)')

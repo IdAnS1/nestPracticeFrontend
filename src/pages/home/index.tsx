@@ -23,7 +23,7 @@ const Home = () => {
     }, [favoriteAssets])
 
     const filteredAssetArray = assetsArray.slice().sort((a: any, b: any) => b.current_price - a.current_price).slice(0, 6)
-    console.log(filteredAssetArray)
+    // console.log(filteredAssetArray)
 
 
     const fetchData = useCallback((data: string[]) => {
@@ -39,12 +39,12 @@ const Home = () => {
     useEffect(() => {
         if (fetchDataRef.current) return
         fetchDataRef.current = true
+        console.log(assetsArray)
         fetchData(favoriteAssetName)
         dispatch(getTopPriceData())
     }, [favoriteAssetName, fetchData, dispatch])
 
     const renderFavoriteBlock = filteredArray.map((item: IChartData) => {
-        console.log(item)
         const currentPrice = item.singleAssets.map(
             (element: any) => element.current_price
         )
