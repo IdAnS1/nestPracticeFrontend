@@ -6,7 +6,8 @@ const AppLoadingButton = styled(LoadingButton)({
     backgroundColor: '#1900D5 !important',
     boxShadow: '0px 1px 7px #332a76 !important',
     padding: '8px 15px !important',
-    maxWidth: 250
+    maxWidth: 250,
+    color: "wheat !important"
 })
 
 export default AppLoadingButton;
