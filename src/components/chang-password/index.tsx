@@ -1,4 +1,4 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import {Box, Grid, TextField} from "@mui/material";
 import {useStyles} from "./styles";
 import AppLoadingButton from "../loading-button";
@@ -13,7 +13,7 @@ const ChangePasswordComponent = () => {
     const classes = useStyles()
     const dispatch = useAppDispatch()
 
-    const handleChangePassword = (e: any) => {
+    const handleChangePassword = (e: React.SyntheticEvent) => {
         e.preventDefault()
 
         dispatch(updateUserPassword(dataPassword))
