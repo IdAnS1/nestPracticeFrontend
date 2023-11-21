@@ -3,7 +3,7 @@ import {useAppDispatch, useAppSelector} from "../../utils/hook";
 import {useStyles} from "./styles";
 import {Box, Grid, TextField} from "@mui/material";
 import AppLoadingButton from "../loading-button";
-import {updateUserInfo} from "../../store/thunks/auth";
+import {getPublicUser, updateUserInfo} from "../../store/thunks/auth";
 
 const SettingsPersonalInfoComponent = () => {
     const classes = useStyles()
@@ -30,8 +30,8 @@ const SettingsPersonalInfoComponent = () => {
             userName: userInfo.username,
             email: userInfo.email
         }
-        console.log(data)
         dispatch(updateUserInfo(data))
+        dispatch(getPublicUser())
     }
 
 
@@ -50,7 +50,7 @@ const SettingsPersonalInfoComponent = () => {
                     label='Имя'
                     variant='outlined'
                     value={userInfo.name}
-                    onChange={(e) => setUserInfo({...userInfo, name: e.target.value})}
+                    onChange={(e) => setUserInfo(prevState => ({...prevState, name: e.target.value}))}
                 />
                 <TextField
                     className={classes.inputField}
@@ -58,7 +58,7 @@ const SettingsPersonalInfoComponent = () => {
                     label='UserName'
                     variant='outlined'
                     value={userInfo.username}
-                    onChange={(e) => setUserInfo({...userInfo, username: e.target.value})}
+                    onChange={(e) => setUserInfo(prevState => ({...prevState, username: e.target.value}))}
                 />
                 <TextField
                     className={classes.inputField}
@@ -66,7 +66,7 @@ const SettingsPersonalInfoComponent = () => {
                     label='Email'
                     variant='outlined'
                     value={userInfo.email}
-                    onChange={(e) => setUserInfo({...userInfo, email: e.target.value})}
+                    onChange={(e) => setUserInfo(prevState => ({...prevState, email: e.target.value}))}
                 />
                 <Box className={classes.buttonBlock}>
                     <AppLoadingButton type='submit'>Сохранить</AppLoadingButton>

@@ -2,8 +2,10 @@ import TopBarComponent from "../top-bar";
 import {Outlet, useLocation} from "react-router-dom";
 import {Box, useMediaQuery} from "@mui/material";
 import SidebarComponent from "../sidebar";
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {useStyles} from "./styles";
+import {useAppDispatch} from "../../utils/hook";
+import {getPublicUser} from "../../store/thunks/auth";
 
 const LayouteComponent: FC = () => {
     const [isOpen, setIsOpen] = useState(true)
@@ -11,6 +13,11 @@ const LayouteComponent: FC = () => {
     const isNonMobile = useMediaQuery('(min-width:760px)')
     const isNonMobilePl = useMediaQuery('(min-width:1030px)')
     const classes = useStyles()
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(getPublicUser())
+    }, [dispatch])
 
     return (
         <>

@@ -7,10 +7,11 @@ import FlexBetween from "../flex-between";
 import {ITopBarProps} from "../../common/types/top-bar";
 import ThemeSwitcherComponent from "../theme-switcher";
 import SearchBarComponent from "../search-bar";
+import {useAppSelector} from "../../utils/hook";
 
 
 const TopBarComponent: FC<ITopBarProps> = (props: ITopBarProps) => {
-    // const {user} = useAppSelector(state => state.auth.user)
+    const {user} = useAppSelector(state => state.auth.user)
     // const theme = useTheme()
     // const colorMode: any = useContext(ColorModeContext)
     const classes = useStyles()
@@ -23,7 +24,7 @@ const TopBarComponent: FC<ITopBarProps> = (props: ITopBarProps) => {
                     <Grid item sm={3} lg={3}>
                         <FlexBetween>
                             <MenuOutlined className={classes.menuIcon} onClick={() => setIsOpen(!isOpen)}/>
-                            <Typography variant='h3'>Welcome {sessionStorage.getItem('name')}</Typography>
+                            <Typography variant='h3'>Welcome {user ? (`${user.firstName}`) : (``)}</Typography>
                         </FlexBetween>
                     </Grid>
                     {isNonMobile &&
