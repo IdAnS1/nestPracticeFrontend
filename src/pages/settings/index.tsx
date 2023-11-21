@@ -6,6 +6,8 @@ import {useStyles} from "./styles";
 import SettingsPersonalInfoComponent from "../../components/settings-personal-info";
 import {useAppDispatch} from "../../utils/hook";
 import {getPublicUser} from "../../store/thunks/auth";
+import ChangePasswordComponent from "../../components/chang-password";
+import DeleteUserComponent from "../../components/delete-user";
 
 const SettingsComponent = () => {
     const [value, setValue] = React.useState('1')
@@ -44,8 +46,8 @@ const SettingsComponent = () => {
                         </TabList>
                     </Box>
                     <TabPanel value="1"><SettingsPersonalInfoComponent/></TabPanel>
-                    <TabPanel value="2">Item Two</TabPanel>
-                    <TabPanel value="3">Item Three</TabPanel>
+                    <TabPanel value="2"><ChangePasswordComponent/></TabPanel>
+                    <TabPanel value="3"><DeleteUserComponent/></TabPanel>
                 </TabContext>
             </Box>
         </Grid>
